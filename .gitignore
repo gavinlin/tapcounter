@@ -2,5 +2,5 @@ bin/
 gen/
 project.properties
 .settings/
-.calsspath
+.classpath
 .project

@@ -4,5 +4,10 @@
     <string name="app_name">TapCounter</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="counter_label_hint">Label Counter</string>
+    <string name="plus">PLUS</string>
+    <string name="minus">MINUS</string>
+    <string name="locked">Locked</string>
+    <string name="unlocked">Unlocked</string>
 
 </resources>
