@@ -27,7 +27,7 @@ abstract class Controller {
 		outboxHandlers.remove(handler);
 	}
 	
-	protected final void notifyOtuboxHandlers(int what, int arg1, int arg2, Object obj){
+	protected final void notifyOutboxHandlers(int what, int arg1, int arg2, Object obj){
 		if (!outboxHandlers.isEmpty()) {
 			for (Handler handler : outboxHandlers) {
 				Message msg = Message.obtain(handler, what, arg1, arg2, obj);

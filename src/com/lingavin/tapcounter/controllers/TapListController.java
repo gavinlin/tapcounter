@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.os.Handler;
 import android.os.HandlerThread;
 
+import com.lingavin.tapcounter.daos.CounterDao;
 import com.lingavin.tapcounter.vos.CounterVo;
 
 public class TapListController extends Controller{
@@ -68,24 +69,30 @@ public class TapListController extends Controller{
 			public void run() {
 				synchronized(counter){
 					counter.setCount(counter.getCount() + amount);
-					//do Persistence
+					CounterDao dao = new CounterDao();
+					dao.update(counter);
 				}
 			}
 			
 		});
 	}
 	
-	private void getCounters(){
-		workerHandler.post(new Runnable(){
-
+	private void getCounters() {
+		workerHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				synchronized(model){
-					
-					notifyOtuboxHandlers(MESSAGE_MODEL_UPDATED, 0, 0, null);
+				CounterDao dao = new CounterDao();
+				ArrayList<CounterVo> counters = dao.getAll();
+				synchronized (model) {
+					while(model.size() > 0) {
+						model.remove(0);
+					}
+					for (CounterVo counter : counters) {
+						model.add(counter);
+					}
+					notifyOutboxHandlers(MESSAGE_MODEL_UPDATED, 0, 0, null);
 				}
 			}
-			
 		});
 	}
 	
@@ -93,7 +100,8 @@ public class TapListController extends Controller{
 		workerHandler.post(new Runnable() {
 			@Override
 			public void run() {
-
+				CounterDao dao = new CounterDao();
+				dao.delete(itemId);
 			}
 		});
 	}
