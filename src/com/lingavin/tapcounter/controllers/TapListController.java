@@ -39,7 +39,7 @@ public class TapListController extends Controller{
 	}
 
 	@Override
-	boolean handleMessage(int what, Object data) {
+	public boolean handleMessage(int what, Object data) {
 		switch(what){
 		case MESSAGE_GET_COUNTERS:
 			getCounters();

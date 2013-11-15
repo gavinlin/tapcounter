@@ -9,6 +9,7 @@ import com.lingavin.tapcounter.vos.OnChangeListener;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Handler.Callback;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,7 +19,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class TapActivity extends Activity implements OnChangeListener {
+public class TapActivity extends Activity implements OnChangeListener, Callback {
 	
 	public static final String EXTRA_TAP_ID = "tapId";
 
@@ -58,6 +59,7 @@ public class TapActivity extends Activity implements OnChangeListener {
 		counterVo = new CounterVo();
 		counterVo.addListener(this);
 		controller = new TapController(counterVo);
+		controller.addOutboxHandler(new Handler(this));
 		
 		initViews();
 	}
@@ -73,7 +75,7 @@ public class TapActivity extends Activity implements OnChangeListener {
 			
 			@Override
 			public void onClick(View arg0) {
-				controller.handlMessage(TapController.MESSAGE_INCREMENT_COUNT);
+				controller.handleMessage(TapController.MESSAGE_INCREMENT_COUNT);
 			}
 			
 		});
@@ -82,7 +84,7 @@ public class TapActivity extends Activity implements OnChangeListener {
 
 			@Override
 			public void onClick(View v) {
-				controller.handlMessage(TapController.MESSAGE_DECREMENT_COUNT);
+				controller.handleMessage(TapController.MESSAGE_DECREMENT_COUNT);
 			}
 			
 		});
@@ -109,6 +111,11 @@ public class TapActivity extends Activity implements OnChangeListener {
 		label.setEnabled(!counterVo.isLocked());
 		count.setText(Integer.toString(counterVo.getCount()));
 		lockedBtn.setChecked(counterVo.isLocked());
+	}
+
+	@Override
+	public boolean handleMessage(Message arg0) {
+		return true;
 	}
 
 }

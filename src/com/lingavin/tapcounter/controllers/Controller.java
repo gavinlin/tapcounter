@@ -15,7 +15,7 @@ abstract class Controller {
 	
 	abstract boolean handleMessage(int what, Object data);
 	
-	public boolean handlMessage(int what){
+	public boolean handleMessage(int what){
 		return handleMessage(what, null);
 	}
 	

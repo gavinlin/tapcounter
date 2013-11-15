@@ -10,4 +10,10 @@
     <string name="locked">Locked</string>
     <string name="unlocked">Unlocked</string>
 
+	<string name="select">Select</string>
+    <string name="load">Load</string>
+    <string name="delete">Delete</string>
+    <string name="increment">Increment</string>
+    <string name="decrement">Decrement</string>
+    
 </resources>
