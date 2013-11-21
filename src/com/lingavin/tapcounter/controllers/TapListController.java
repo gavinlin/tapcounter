@@ -31,8 +31,6 @@ public class TapListController extends Controller{
 		workerHandler = new Handler(workThread.getLooper());
 	}
 
-	
-	
 	@Override
 	public void dispose() {
 		super.dispose();

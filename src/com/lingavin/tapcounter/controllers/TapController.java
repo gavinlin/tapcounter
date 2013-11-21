@@ -4,6 +4,8 @@ import com.lingavin.tapcounter.vos.CounterVo;
 
 public class TapController extends Controller{
 
+	private static final String TAG = TapController.class.getSimpleName();
+	
 	public static final int MESSAGE_SAVE_MODEL = 1;
 	public static final int MESSAGE_INCREMENT_COUNT = 2;
 	public static final int MESSAGE_DECREMENT_COUNT = 3;
@@ -26,8 +28,21 @@ public class TapController extends Controller{
 	}
 	
 	@Override
+	public boolean handleMessage(int what){
+		return messageState.handleMessage(what);
+	}
+	
+	@Override
 	public boolean handleMessage(int what, Object data) {
-		return true;
+		return messageState.handleMessage(what, data);
+	}
+
+	private ControllerState messageState;
+	protected void setMessageState(ControllerState messageState) {
+		if(this.messageState != null){
+			this.messageState.disopse();
+		}
+		this.messageState = messageState;
 	}
 
 }
