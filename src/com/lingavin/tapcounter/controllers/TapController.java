@@ -25,6 +25,13 @@ public class TapController extends Controller{
 	
 	public TapController(CounterVo model){
 		this.model = model;
+		messageState = new UnlockedState(this);
+	}
+	
+	@Override
+	public void dispose(){
+		super.dispose();
+		messageState.disopse();
 	}
 	
 	@Override

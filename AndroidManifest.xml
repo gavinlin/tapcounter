@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.TapListActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.PrefsActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
